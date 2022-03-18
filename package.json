@@ -1,0 +1,24 @@
+{
+  "name": "dickbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "user_session.json"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.6",
+    "quickchart-js": "^3.0.0",
+    "telegraf": "^4.7.0",
+    "telegraf-session-local": "^2.1.0"
+  }
+}
