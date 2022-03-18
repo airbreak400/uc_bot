@@ -21,12 +21,20 @@ const startCommand = (ctx) => {
                 newUser.save().then(() => {
                     ctx.replyWithHTML(message, Markup.inlineKeyboard([
                         Markup.button.url("Добавить бота в группу", "http://t.me/babjiucbot?startgroup=d")
-                        ]))
+                        ])).then().catch(function(error) {
+                            if (error.response && error.response.statusCode === 403) {
+                              console.log(error)
+                            }
+                          });
                 })
             } else {
                 ctx.replyWithHTML(message, Markup.inlineKeyboard([
                     Markup.button.url("Добавить бота в группу", "http://t.me/babjiucbot?startgroup=d")
-                    ]))
+                    ])).then().catch(function(error) {
+                        if (error.response && error.response.statusCode === 403) {
+                          console.log(error)
+                        }
+                      });
             }
         })
     }   

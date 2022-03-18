@@ -46,13 +46,21 @@ const globalTopCommandHandler = (ctx) => {
                     topUsersString += userString;
                 }
     
-                ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id });
+                ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
+                    if (error.response && error.response.statusCode === 403) {
+                      console.log(error)
+                    }
+                  });
     
                 
             }
         })
     } else {
-        ctx.reply('Данная команда доступна только в личке с ботом❗️', { reply_to_message_id: ctx.message.message_id })
+        ctx.reply('Данная команда доступна только в личке с ботом❗️', { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
+            if (error.response && error.response.statusCode === 403) {
+              console.log(error)
+            }
+          });
     }
 }
 

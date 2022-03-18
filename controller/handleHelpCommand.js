@@ -10,7 +10,11 @@ const handleHelpCommand = (ctx) => {
 Наш канал — @airbreak_pubgm
 Админ — @souljawitch
         `
-        ctx.reply(message, { reply_to_message_id: ctx.message.message_id })
+        ctx.reply(message, { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
+                if (error.response && error.response.statusCode === 403) {
+                  console.log(error)
+                }
+              });
 }
 
 export default handleHelpCommand;

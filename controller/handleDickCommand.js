@@ -92,7 +92,7 @@ const handleFoundGroup = async (chat, ctx) => {
         if(newUser.dickSize < 0) newUser.dickSize = 0;
         chat.users.push(newUser);
         chat.save().then(() => {
-            ctx.replyWithHTML(`<a href="tg://user?id=${newUser.userId}">${newUser.userFullName}</a>, Ты получил ${newUser.dickSize} см. \nТеперь твой баланс равен ${newUser.dickSize} UC. \nСледующая попытка завтра!`, { reply_to_message_id: ctx.message.message_id });
+            ctx.replyWithHTML(`<a href="tg://user?id=${newUser.userId}">${newUser.userFullName}</a>, Ты получил ${newUser.dickSize} UC. \nТеперь твой баланс равен ${newUser.dickSize} UC. \nСледующая попытка завтра!`, { reply_to_message_id: ctx.message.message_id });
         })
         .catch(err => {
             if(err) console.log(err);
