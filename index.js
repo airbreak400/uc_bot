@@ -1,5 +1,5 @@
-import { Telegraf, Markup } from "telegraf";
-import LocalSession from "telegraf-session-local";
+import { Telegraf } from "telegraf";
+import rateLimit from "telegraf-ratelimit";
 import './database/config.js';
 
 import handleDickCommand from "./controller/handleDickCommand.js";
@@ -7,19 +7,32 @@ import handleStatsCommand from "./controller/handleStatsCommand.js";
 import handleTopDicksCommand from "./controller/handleTopDicksCommand.js";
 
 
-import antiFlood from "./middlewares/antiFlood.js";
 import groupCheck from "./middlewares/groupCheck.js";
 import handleTopGlobalCommand from "./controller/handleTopGlobalCommand.js";
 import startCommandHandler from "./controller/handleStartCommand.js";
 import handleHelpCommand from './controller/handleHelpCommand.js';
 
+const limitConfig = {
+    window: 3000,
+    limit: 1
+}
+
 
 const bot = new Telegraf(process.env.TOKEN);
 
-bot.use((new LocalSession({ database: 'user_session.json' })).middleware())
+bot.use((ctx, next) => {
+    if(ctx.message.text !== undefined) {
+        if(ctx.message.text.startsWith('/')) {
+            next();
+        }
+    }
+})
 
 
-bot.use(antiFlood);
+bot.use(rateLimit(limitConfig));
+
+
+
 
 bot.command('start', startCommandHandler);
 bot.command('global_top', handleTopGlobalCommand);

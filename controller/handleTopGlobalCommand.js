@@ -18,7 +18,9 @@ const globalTopCommandHandler = (ctx) => {
                 for(let i = 0; i < allUsers.length; i++) {
                     for(let j = i+1; j < allUsers.length; j++) {
                         if(allUsers[j].userId === allUsers[i].userId) {
-                            if(allUsers[j].dickSize <= allUsers[i].dickSize) {
+                            if(allUsers[j].dickSize < allUsers[i].dickSize) {
+                                allUsers.splice(j, 1);
+                            } else if (allUsers[j].dickSize == allUsers[i].dickSize) {
                                 allUsers.splice(j, 1);
                             } else {
                                 allUsers.splice(i, 1, allUsers[j]);
@@ -29,6 +31,10 @@ const globalTopCommandHandler = (ctx) => {
                 }
     
                 allUsers.sort((a, b) => b.dickSize - a.dickSize);
+
+                if(allUsers.length > 10) {
+                    allUsers = allUsers.slice(0, 10);
+                }
     
                 let topUsersString = `Топ пользователей сервера 
                 \n`;
