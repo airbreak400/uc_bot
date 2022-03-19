@@ -21,7 +21,7 @@ const limitConfig = {
 const bot = new Telegraf(process.env.TOKEN);
 
 bot.use((ctx, next) => {
-    if(ctx.message.text !== undefined) {
+    if(ctx.message !== undefined && ctx.message.text !== undefined) {
         if(ctx.message.text.startsWith('/')) {
             next();
         }
