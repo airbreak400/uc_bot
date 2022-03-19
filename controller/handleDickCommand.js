@@ -28,7 +28,7 @@ async function createNewUser(ctx) {
     return {
         userFullName: userNameString,
         userId: ctx.message.from.id,
-        dickSize: random(1,15),
+        dickSize: random(1,10),
         lastCheck: new Date()
     }
 }
