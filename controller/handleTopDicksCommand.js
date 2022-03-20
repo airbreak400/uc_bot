@@ -2,7 +2,7 @@ import Chat from "../database/models/Chat.js";
 
 const handleFoundGroup = async (chat, ctx) => {
 
-    const copyUsersArray = JSON.parse(JSON.stringify(chat.users));
+    let copyUsersArray = JSON.parse(JSON.stringify(chat.users));
     copyUsersArray.sort((a, b) => b.dickSize - a.dickSize);
     if(copyUsersArray.length > 10) {
         copyUsersArray = copyUsersArray.slice(0, 10);

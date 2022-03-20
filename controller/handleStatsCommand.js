@@ -4,7 +4,7 @@ import QuickChart from "quickchart-js";
 
 const handleFoundGroup = (chat, ctx) => {
 
-    const copyUsersArray = JSON.parse(JSON.stringify(chat.users));
+    let copyUsersArray = JSON.parse(JSON.stringify(chat.users));
     // console.log(copyUsersArray);
     copyUsersArray.sort((a, b) => b.dickSize - a.dickSize);
     if(copyUsersArray.length > 10) {
