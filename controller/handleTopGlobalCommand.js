@@ -2,10 +2,10 @@ import Chat from "../database/models/Chat.js";
 
 const globalTopCommandHandler = (ctx) => {
     if(ctx.chat.type === 'private') {
-        Chat.find({}, (err, result) => {
+        Chat.find({}, async (err, result) => {
             if(err) return console.log('error happened when searching a group');
             if(result === null) {
-                ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
+                await ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
             } else if(result !== null) {
                 const copyChatsArray = JSON.parse(JSON.stringify(result));
     
@@ -52,7 +52,7 @@ const globalTopCommandHandler = (ctx) => {
                     topUsersString += userString;
                 }
     
-                ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
+                await ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
                     if (error.response && error.response.statusCode === 403) {
                       console.log(error)
                     }

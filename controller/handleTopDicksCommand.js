@@ -25,15 +25,15 @@ const handleFoundGroup = async (chat, ctx) => {
         topUsersString += userString;
     }
 
-    ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id });
+    await ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id });
 
 }
 
 const handleTopDicksCommand = (ctx) => {
-    Chat.findOne({ chatId: ctx.message.chat.id }, (err, result) => {
+    Chat.findOne({ chatId: ctx.message.chat.id }, async (err, result) => {
         if(err) return console.log('error happened when searching a group');
         if(result === null) {
-            ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
+            await ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
         } else if(result !== null) {
             handleFoundGroup(result, ctx);
         }

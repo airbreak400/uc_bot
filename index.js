@@ -42,17 +42,11 @@ bot.command('help', handleHelpCommand);
 
 bot.use(groupCheck);
 
-bot.command('uc', (ctx) => {
-    handleDickCommand(ctx);
-})
+bot.command('uc', handleDickCommand)
 
-bot.command('stats', (ctx) => {
-    handleStatsCommand(ctx);
-})
+bot.command('stats', handleStatsCommand)
 
-bot.command('top_players', (ctx) => {
-    handleTopDicksCommand(ctx);
-})
+bot.command('top_players', handleTopDicksCommand)
 
 
 

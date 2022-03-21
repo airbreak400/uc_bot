@@ -2,7 +2,7 @@ import Chat from "../database/models/Chat.js";
 import QuickChart from "quickchart-js";
 
 
-const handleFoundGroup = (chat, ctx) => {
+const handleFoundGroup = async (chat, ctx) => {
 
     let copyUsersArray = JSON.parse(JSON.stringify(chat.users));
     // console.log(copyUsersArray);
@@ -56,15 +56,15 @@ const handleFoundGroup = (chat, ctx) => {
     statsImg.setWidth(700);
     statsImg.setHeight(500);
 
-    ctx.replyWithPhoto({ url: statsImg.getUrl() }, { reply_to_message_id: ctx.message.message_id });
+    await ctx.replyWithPhoto({ url: statsImg.getUrl() }, { reply_to_message_id: ctx.message.message_id });
 
 }
 
 const handleStatsCommand = (ctx) => {
-    Chat.findOne({ chatId: ctx.message.chat.id }, (err, result) => {
+    Chat.findOne({ chatId: ctx.message.chat.id }, async (err, result) => {
         if(err) return console.log('error happened when searching a group');
         if(result === null) {
-            ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
+            await ctx.reply(`Начните играть чтобы появилась статистика`, { reply_to_message_id: ctx.message.message_id });
         } else if(result !== null) {
             handleFoundGroup(result, ctx);
         }

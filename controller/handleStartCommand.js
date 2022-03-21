@@ -18,8 +18,8 @@ const startCommand = (ctx) => {
     
             if(user === null) {
                 const newUser = new Direct({userId: ctx.message.from.id});
-                newUser.save().then(() => {
-                    ctx.replyWithHTML(message, Markup.inlineKeyboard([
+                newUser.save().then(async () => {
+                    await ctx.replyWithHTML(message, Markup.inlineKeyboard([
                         Markup.button.url("Добавить бота в группу", "http://t.me/babjiucbot?startgroup=d")
                         ])).then().catch(function(error) {
                             if (error.response && error.response.statusCode === 403) {
