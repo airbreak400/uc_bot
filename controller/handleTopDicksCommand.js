@@ -24,8 +24,7 @@ const handleFoundGroup = async (chat, ctx) => {
 
         topUsersString += userString;
     }
-
-    await ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id });
+    await ctx.replyWithHTML(Buffer.from(topUsersString, 'utf-8').toString(), { reply_to_message_id: ctx.message.message_id });
 
 }
 

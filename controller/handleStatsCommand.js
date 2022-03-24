@@ -13,6 +13,12 @@ const handleFoundGroup = async (chat, ctx) => {
     
     let finalData = {};
     finalData.fullNames = copyUsersArray.map(x => {
+        // if(x.userFullName.length > 15) {
+        //     return Buffer.from(x.userFullName.slice(0, 12) + '...', 'utf-8').toString();
+        // } else {
+        //     return Buffer.from(x.userFullName, 'utf-8').toString();
+        // }
+
         if(x.userFullName.length > 15) {
             return x.userFullName.slice(0, 12) + '...';
         } else {

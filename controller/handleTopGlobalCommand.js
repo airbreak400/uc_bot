@@ -52,7 +52,7 @@ const globalTopCommandHandler = (ctx) => {
                     topUsersString += userString;
                 }
     
-                await ctx.replyWithHTML(topUsersString, { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
+                await ctx.replyWithHTML(Buffer.from(topUsersString, 'utf-8').toString(), { reply_to_message_id: ctx.message.message_id }).then().catch(function(error) {
                     if (error.response && error.response.statusCode === 403) {
                       console.log(error)
                     }
